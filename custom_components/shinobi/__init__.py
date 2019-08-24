@@ -87,6 +87,18 @@ def _shinobi_request(api_path, method='get', data=None):
     return response
 
 
+def get_monitors():
+    """Get all monitors from the Shinobi API."""
+    _LOGGER.debug('Sending request to Shinobi to get all monitors')
+
+    get_monitors_path = '/monitor/' + SHINOBI['group_key']
+
+    monitors = _shinobi_request(get_monitors_path)
+
+    _LOGGER.debug('Shinobi returned {} monitors: {}'.format(str(len(monitors)), str([monitor['name'] for monitor in monitors])))
+
+    return monitors
+
 def get_all_started_monitors():
     """Get all started monitors from the Shinobi API."""
     _LOGGER.debug('Sending request to Shinobi to get all started monitors')
